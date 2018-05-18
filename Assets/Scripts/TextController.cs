@@ -7,7 +7,14 @@ using UnityEngine.UI;
 public class TextController : MonoBehaviour
 {
     public Text text;
-    private enum States {cell, mirror, sheets_0, locks_0, sheets_1, cell_mirror, lock_1, freedom  };
+    private enum States {
+        cell, mirror, sheets_0,
+        locks_0, sheets_1, cell_mirror,
+        lock_1, corridor_0, stairs_0,
+        floor, closet_door, corridor_1,
+        stairs_1, in_closet, corridor_2,
+        stairs_2, corridor_3, courtyard
+    };
     private States currentState;
 
     // Use this for initialization
@@ -25,35 +32,35 @@ public class TextController : MonoBehaviour
             // Ordered left to right from state diagram here:
             // https://docs.google.com/document/d/128_lD0Pp31TiKlIKnu8IgeaGWtBlRN_QL6GYvPyYULs/edit
             case States.cell:
-                State_Cell();
+                Cell();
                 break;
             case States.sheets_0:
-                State_Sheets_0();
+                Sheets_0();
                 break;
             case States.mirror:
-                State_Mirror();
+                Mirror();
                 break;
             case States.locks_0:
-                State_Lock_0();
+                Lock_0();
                 break;
             case States.cell_mirror:
-                State_Cell_Mirror();
+                Cell_Mirror();
                 break;
             case States.sheets_1:
-                State_Sheets_1();
+                Sheets_1();
                 break;
             case States.lock_1:
-                State_Lock_1();
+                Lock_1();
                 break;
-            case States.freedom:
-                State_Freedom();
+            case States.corridor_0:
+                Corridor_0();
                 break;
             default:
                 break;
         }
     }
 
-    private void State_Cell()
+    private void Cell()
     {
         text.text = "You are in a prison cell, and you want to escape.  There are " +
                 "some dirty sheets on the bed, a mirror on the wall, and the door" +
@@ -71,7 +78,7 @@ public class TextController : MonoBehaviour
         }
     }
 
-    private void State_Sheets_0()
+    private void Sheets_0()
     {
         text.text = "You can't believe you sleep in these things.  Surely it's " +
             "time somebody changed them.  The pleasures of prison life " +
@@ -83,7 +90,7 @@ public class TextController : MonoBehaviour
         }
     }
 
-    private void State_Mirror()
+    private void Mirror()
     {
         text.text = "Just a mirror.  Breaking it might make a nice shiv. " + 
                 "Thinking about it, I wonder why the guards allow it in the " + 
@@ -99,7 +106,7 @@ public class TextController : MonoBehaviour
         }
     }
 
-    private void State_Lock_0()
+    private void Lock_0()
     {
         text.text = "A lock on your cell, the only thing between me and freedom! " +
             "Maybe if I had something to see it at a better angle I might find " + 
@@ -111,7 +118,7 @@ public class TextController : MonoBehaviour
         }
     }
 
-    private void State_Cell_Mirror()
+    private void Cell_Mirror()
     {
         text.text = "I now have the mirror in my hand.\n\n" +
                 "Press S to view Sheets, L to view Lock";
@@ -126,7 +133,7 @@ public class TextController : MonoBehaviour
     }
 
 
-    private void State_Sheets_1()
+    private void Sheets_1()
     {
         text.text = "You can't believe you sleep in these things.  Surely it's " +
             "time somebody changed them.  The pleasures of prison life " +
@@ -138,7 +145,7 @@ public class TextController : MonoBehaviour
         }
     }
 
-    private void State_Lock_1()
+    private void Lock_1()
     {
         text.text = "A lock on your cell, the only thing between you and freedom! " + 
             "With the mirror you can see the lock didn't fully click and can be opened " + 
@@ -150,12 +157,27 @@ public class TextController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            currentState = States.freedom;
+            currentState = States.corridor_0;
         }
     }
 
-    private void State_Freedom()
+    private void Corridor_0()
     {
-        text.text = "I am free!  Now what...\n\n";
+        text.text = "You are in a corridor.  There is stairs to your right that leads " + 
+            "up to where the guards are and freedom.  To your left is a closet with a " + 
+            "locked door.\n\n" +
+            "Press S for Stairs, C for closet, F to scan the Floor";
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            currentState = States.stairs_0;
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            currentState = States.closet_door;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            currentState = States.floor;
+        }
     }
 }
