@@ -55,6 +55,36 @@ public class TextController : MonoBehaviour
             case States.corridor_0:
                 Corridor_0();
                 break;
+            case States.stairs_0:
+                Stairs_0();
+                break;
+            case States.closet_door:
+                Closet_Door();
+                break;
+            case States.floor:
+                Floor();
+                break;
+            case States.corridor_1:
+                Corridor_1();
+                break;
+            case States.stairs_1:
+                Stairs_1();
+                break;
+            case States.in_closet:
+                In_Closet();
+                break;
+            case States.corridor_2:
+                Corridor_2();
+                break;
+            case States.stairs_2:
+                Stairs_2();
+                break;
+            case States.corridor_3:
+                Corridor_3();
+                break;
+            case States.courtyard:
+                Courtyard();
+                break;
             default:
                 break;
         }
@@ -178,6 +208,135 @@ public class TextController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             currentState = States.floor;
+        }
+    }
+
+    private void Stairs_0()
+    {
+        text.text = "I am mid way up the stairs I can see a guard at the top.  This " + 
+            "way isn't an option if I want this story to end in freedom.\n\n" +
+            "Press R to Return to the corridor";
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentState = States.corridor_0;
+        }
+    }
+
+    private void Closet_Door()
+    {
+        text.text = "A locked closest, wonder what is so important in there to lock it?\n\n" +
+            "Press R to Return to the corridor";
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentState = States.corridor_0;
+        }
+    }
+
+    private void Floor()
+    {
+        text.text = "What a gross floor.  Looks like there is a hairclip on the floor. " + 
+            "I guess another man's trash is another's treasure!\n\n" +
+            "Press R to Return to the corridor, H for Hairclip";
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentState = States.corridor_0;
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            currentState = States.corridor_1;
+        }
+    }
+
+    private void Corridor_1()
+    {
+        text.text = "You are in a corridor.  There is stairs to your right that leads " +
+            "up to where the guards are and freedom.  To your left is a closet with a " +
+            "locked door that you could pick with your hairpin.\n\n" +
+            "Press S for Stairs, P for Picking the closet";
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            currentState = States.stairs_1;
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            currentState = States.in_closet;
+        }
+    }
+
+    private void Stairs_1()
+    {
+        text.text = "I am mid way up the stairs I can see a guard at the top.  This " +
+            "way isn't an option if I want this story to end in freedom.\n\n" +
+            "Press R to Return to the corridor";
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentState = States.corridor_1;
+        }
+    }
+
+    private void In_Closet()
+    {
+        text.text = "You are no in the closet, you see that there is guard uniforms " +
+            "of all shapes and sizes.\n\n" + 
+            "Press R to Return to the corridor, D to Dress up as a guard";
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentState = States.corridor_2;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            currentState = States.corridor_3;
+        }
+    }
+
+    private void Corridor_2()
+    {
+        text.text = "You are in a corridor.  There is stairs to your right that leads " +
+            "up to where the guards are and freedom.  To your left is the closet.\n\n" +
+            "Press S for Stairs, C to go back into the Closet";
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            currentState = States.stairs_2;
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            currentState = States.in_closet;
+        }
+    }
+
+    private void Stairs_2()
+    {
+        text.text = "I am mid way up the stairs I can see a guard at the top.  This " +
+            "way isn't an option if I want this story to end in freedom.\n\n" +
+            "Press R to Return to the corridor";
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentState = States.corridor_2;
+        }
+    }
+
+    private void Corridor_3()
+    {
+        text.text = "You are in a corridor looking pretty spiffy as a guard, maybe " + 
+            "that should be your job afterwards, that would be ironic.  Time to see " + 
+            "if the guards are fooled by the dress up.\n\n" +
+            "Press S for Stairs, U to Undress back to prison garb";
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            currentState = States.courtyard;
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            currentState = States.in_closet;
+        }
+    }
+
+    private void Courtyard()
+    {
+        text.text = "You walk right past the guards to freedom!  Press P to Play again.\n\n";
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            currentState = States.cell;
         }
     }
 }
